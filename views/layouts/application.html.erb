@@ -22,10 +22,39 @@
     <div>
       <h3> I'm a footer</h3>
       <p>Put things in the footer</p>
-      <h1>Yoshi is my wife</h1>
+      <h1 style="color:red">Yoshi is my wife</h1>
     </div>
     <div>
       <%= link_to('this is a link to the BBC', 'http://bbc.co.uk') %>
     </div>
+    
+
+    <% if @request.query['first_name'] && !@request.query['first_name'].empty? %>
+      Hello there <%= @request.query['first_name'] %>
+    <% else %>
+      Enter thy name
+    <% end %>
+
+    <form method='post' action="<%= @request.path %>">
+        First name: <input type="text" name="first_name" placeholder='first name'/><br />
+        <input type="submit" value="Submit" />
+    </form>
+    <br>
+
+    <form action="<%= @request.path %>">
+      <input type="radio" name="sex" value="male">Male<br>
+      <input type="radio" name="sex" value="female">Female
+      <br><input type="submit" value="Submit" />
+    </form><br>
+
+    <% if @request.query['sex'] && !@request.query['sex'].empty? %>
+      Your gender <%= @request.query['sex'] %>
+    <% else %>
+      Tell us your gender please
+    <% end %><br>
+
+    <% @request.query['sex'] %>
+
+
   </body>
 </html>
